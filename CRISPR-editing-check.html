@@ -33,14 +33,14 @@
 	<br><br>
 	<p id="demo"></p>
 	<button onclick="clearseq()">Clear</button>
-	<button onclick="putExample()">Example Input</button>
-	<button onclick="getSeq()">Get intact sequence</button><br><br>
+	<button onclick="putExample()">Example Input</button><br><br>
 	<input type="file" id="files" name="files[]" multiple /><br><br>
 	<button onclick="analyze()">Start Analyze</button>
 	<select id="box1">
 		<option value="F">Forward Strand</option>
 		<option value="R">Reverse Strand</option>
-	</select><br><br>
+	</select>
+	<label for="box1">(Read1 or Read2? Forward strand is to check read1; reverse strand is for read2)</label><br><br>
 	<button style="visibility:hidden" id="download-btn" onclick="download()"> Download output csv file</button><br><br>
 	<output id="output" style="visibility:hidden;"></output>
 

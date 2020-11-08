@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Read Text File</title>
+</head>
+
+<body>
+	<input type="file" name="inputfile" id="inputfile"><br>
+	<br> <pre id="output"></pre>
+
+	<script src="libs/pako_inflate.min.js"></script>
+	<script type="text/javascript">
+		document.getElementById('inputfile').addEventListener('change', function() {
+			console.log("add a file");
+			var fr = new FileReader();
+			fr.onload = function(event) {
+				var result = pako.inflate(event.target.result, { to: 'string' });
+				console.log(result);
+			}
+			// fr.onload = function() {
+			// 	var compressed = new Uint8Array(fr.result);
+			// 	try {
+			// 		var data = pako.inflate(compressed);
+			// 		} catch (err) {
+			// 		console.log(err);
+			// 	}
+			// Convert gunzipped byteArray back to ascii string:
+			// console.log(new TextDecoder('utf-8').decode(data))
+				//console.log(strData);
+				//document.getElementById('output').textContent = strData;
+			//};
+			//fr.readAsBinaryString(this.files[0]);
+			//fr.readAsText(this.files[0]);
+			//fr.readAsArrayBuffer(this.files[0]);
+			let file = this.files[0]
+			let slice = file.slice(0, 200);
+			fr.readAsArrayBuffer(slice);
+		});
+</script>
+</body>
+
+</html>

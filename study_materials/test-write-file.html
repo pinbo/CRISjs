@@ -1,0 +1,28 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Write Text File</title> 
+</head> 
+  
+<body>
+    <label>Filename</label>
+    <input type="text" id="filename" value="hello.txt"/>
+    <br/><br/>
+    <label for="text-val">File content</label><br/>
+    <textarea id="text-val" rows="4">This is the content of my file</textarea><br/>
+    <button id="download-btn"> Download dynamically generated text file</button>
+
+    <script src="libs/FileSaver.min.js"></script>
+    <script>
+        document.getElementById("download-btn").addEventListener("click", function(){
+            var text = document.getElementById("text-val").value;
+            var filename = document.getElementById("filename").value;
+            var blob = new Blob([text], {
+                type: "text/plain;charset=utf-8"
+            });
+            saveAs(blob, filename);
+        }, false);
+   </script> 
+</body>
+  
+</html>

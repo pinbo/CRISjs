@@ -29,17 +29,17 @@
 	<label for="wt">Wild type sequence</label><br>
 	<textarea id="wt" name="Wildtype" rows="5" cols="80" placeholder="The target gene sequences (long enough to include both the left and right flanking sequences)"></textarea>
 	<br><br>
-	<p id="demo"></p>
 	<button onclick="clearseq()">Clear</button>
 	<button onclick="putExample()">Example Input</button><br><br>
 	<input type="file" id="files" name="files[]" multiple /><br><br>
-	<button onclick="analyze(analyzeFiles)">Start Analyze</button>
+	<button onclick="analyze()">Start Analyze</button>
 	<select id="box1">
 		<option value="F">Forward Strand</option>
 		<option value="R">Reverse Strand</option>
 	</select>
 	<label for="box1">(Read1 or Read2? Forward strand is to check read1; reverse strand is for read2)</label><br><br>
 	<button style="visibility:hidden" id="download-btn" onclick="download()"> Download output csv file</button><br><br>
+	<p id="demo"></p><br>
 	<output id="output" style="display:none"></output>
 
 	<h2>Help</h2>

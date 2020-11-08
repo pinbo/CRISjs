@@ -34,7 +34,7 @@ function getSeq() {
     }
     var wtSeq = template.substring(n1, n2 + rightSeq.length);
     // check whether we get the correct wild type seqeunce
-    document.getElementById("demo").innerHTML = "<strong>Intact sequence</strong><br>" + wtSeq;
+    //document.getElementById("demo").innerHTML = "<strong>Intact sequence</strong><br>" + wtSeq;
     return [leftSeq, rightSeq, gRNA, wtSeq];
 }
 // add click to start analyzing

@@ -80,6 +80,7 @@ function checkIndel(leftSeq, rightSeq, gRNA, wtSeq, filename, fileContent){//rea
     }
     // check linenumber to make sure everything is read
     console.log(filename + " has line number " + (lineNum - 1));
+    document.getElementById("demo").innerHTML += filename + " has line number " + (lineNum - 1) + "<br>";
     //return [matchLeft, matchRight, matchGRNA, matchBoth, nindel, indels, uniqMutSeq];
     pamPos = wtSeq.indexOf(gRNA) + gRNA.length; // PAM position
     console.log("matchBoth  " + matchBoth);
@@ -122,6 +123,7 @@ function analyzeFiles() {
         //output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ', f.size, ' bytes, last modified: ', f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a', '</li>');
         // read file content
         console.log(f.name);
+        //document.getElementById("demo").innerHTML += "Processing " + f.name + "<br>";
         var fr = new FileReader();
         fr.filename = f.name;
         if (f.name.split('.').pop() == "gz") {
@@ -140,6 +142,7 @@ function analyzeFiles() {
         // fr.readAsArrayBuffer(blob);
         fr.readAsArrayBuffer(f);
     } //end of file loop
+    //document.getElementById("demo").innerHTML += "Job done: all input files have been processed!<br>";
     //console.log(document.getElementById('output').value);
     //var table1 = document.getElementById('output').value.split(/\n/);
     //document.getElementById('output').value = createTable(document.getElementById('output').value.split('\n'));
@@ -275,9 +278,9 @@ function download(){
 }
 
 // function to generate results
-function analyze(callback){
+function analyze(){
     document.getElementById('output').value = "";
-    callback();
+    analyzeFiles();
     //document.getElementById('list').value = '<table id="summary">' + createTable(document.getElementById('list').value.split('\n')) + '</table>';
     //document.getElementById("demo").innerHTML = createTable(document.getElementById('list').value.split('\n'));
     if (document.getElementById('output').value){
@@ -285,11 +288,10 @@ function analyze(callback){
     }
 }
 
-// add example input
+//add example input
 function putExample(){
     document.getElementById("left").value = "GAGGAGGTGGACGAGC";
     document.getElementById("right").value = "GCGCCGCGCCCGACG";
     document.getElementById("grna").value = "GCTGGCGGCGCTCGGGTACA";
     document.getElementById("wt").innerHTML = "AAGATGATGGTGTCGGGGTCGGCGGCGGCGGGGGAGGGGGAGGAGGTGGACGAGCTGCTGGCGGCGCTCGGGTACAAGGTGCGGGCGTCCGACATGGCGGACGTGGCGCAGAAGCTGGAGTAGCTGGAGATGGCCATGGGGATGGGCGGCGTGGGCGCCGGCGCCGCGCCCGACGACAGCTTCGCCACCCACCTCGCCACGGACACCGTGCACT";
-
 }

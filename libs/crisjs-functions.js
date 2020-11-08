@@ -275,8 +275,9 @@ function download(){
 }
 
 // function to generate results
-function analyze(){
-    analyzeFiles();
+function analyze(callback){
+    document.getElementById('output').value = "";
+    callback();
     //document.getElementById('list').value = '<table id="summary">' + createTable(document.getElementById('list').value.split('\n')) + '</table>';
     //document.getElementById("demo").innerHTML = createTable(document.getElementById('list').value.split('\n'));
     if (document.getElementById('output').value){

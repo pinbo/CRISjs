@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Demultiplex</title>
+	<style>
+		body{
+			margin: 0 auto;
+			font-size: 12pt;    
+			/*font-family: 'PT Serif', serif;*/
+			line-height: 1.2;
+			max-width: 8in;
+			/*text-align: justify;*/
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Demultiplex NGS FASTQ</h1>
+	<br><br>
+	<label for="left">Your left adapter sequence:</label>
+	<input id="left" name="LeftAdapter" placeholder="adapter added to your forward PCR primer" size="40"><br><br>
+	<label for="right">Your right adapter sequence:</label>
+	<input id="right" name="RightAdapter" placeholder="adapter added to your reverse PCR primer" size="40"><br><br>
+	<button onclick="clearseq()">Clear</button>
+	<button onclick="putExample()">Example Input</button><br><br>
+	<label for="barcode">Select the barcode file</label>
+	<input type="file" id="barcode" name="barcode" /><br><br>
+	<label for="fastq">Select the fastq or fastq.gz file</label>
+	<input type="file" id="fastq" name="fastq" /><br><br>
+
+
+
+
+	<button onclick="readBarcode()">Read Barcodes</button>
+	<button onclick="startAnalyze()">Start Demultiplex</button>
+	<p id="demo1"></p><br>
+	<p id="demo2"></p><br>
+
+
+	<progress style="visibility:hidden" id="progress" value="0" max="100"></progress><br>
+	<button style="visibility:hidden" id="download-btn" onclick="download()"> Download output csv file</button><br>
+	<p id="demo"></p><br>
+	<output id="output" style="display:none"></output>
+
+	<script src="libs/pako.min.js"></script>
+	<script src="libs/FileSaver.min.js"></script>
+	<script src="libs/demultiplex.js"></script>
+	<script src="libs/jszip.min.js"></script>
+
+</body>
+
+</html>

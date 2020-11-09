@@ -6,12 +6,13 @@ var dictSample = {}; // a dictionary of demultiplexed samples: key is barcodes
 
 //download a zipped file containing all gz files
 function download(){
-	document.getElementById("progress2").max = Object.keys(dictSample).length;
-	document.getElementById("progress2").value = 0;
-	document.getElementById("gzip-progress").style.visibility = "visible";
+	// document.getElementById("progress2").max = Object.keys(dictSample).length;
+	// document.getElementById("progress2").value = 0;
+	// document.getElementById("gzip-progress").style.visibility = "visible";
+	document.getElementById("demo3").innerHTML = "Creating files for download. It may takes a few seconds";
 	var zip = new JSZip();
 	for (let k in dictSample){
-		document.getElementById("progress2").value += 1;
+		// document.getElementById("progress2").value += 1;
 		let text = dictSample[k];
 		let output = pako.gzip(text);
 		zip.file(k + ".gz", output);
@@ -31,8 +32,8 @@ function clearseq() {
 	document.getElementById("demo2").innerHTML = "";
     document.getElementById('output').value = "";
     document.getElementById("download-btn").style.visibility = "hidden";
-	document.getElementById("demultiplex-progress").style.visibility = "hidden";
-	document.getElementById("gzip-progress").style.visibility = "hidden";
+	// document.getElementById("demultiplex-progress").style.visibility = "hidden";
+	// document.getElementById("gzip-progress").style.visibility = "hidden";
 };
 
 //add example input
@@ -114,9 +115,9 @@ class sample {
 // process fastq file
 function demultiplex(fileContent){
 	var lines = fileContent.split(/\r?\n/);
-	document.getElementById("progress1").max = lines.length;
-	document.getElementById("progress1").value = 0;
-	document.getElementById("demultiplex-progress").style.visibility = "visible";
+	// document.getElementById("progress1").max = lines.length;
+	// document.getElementById("progress1").value = 0;
+	// document.getElementById("demultiplex-progress").style.visibility = "visible";
 	//var samples = {}; // a dictionary of demultiplexed samples
 	var leftAdapter = document.getElementById('left').value;
 	var rightAdapter = document.getElementById('right').value;
@@ -127,7 +128,7 @@ function demultiplex(fileContent){
 	var n2 = 1;
 	var readID = "";
 	for (var line of lines){
-		document.getElementById("progress1").value += 1;
+		// document.getElementById("progress1").value += 1;
 		if (line){
 			let ss = line.split(/\t/);
 			if (line.startsWith("@") && line.includes(" ")){ // I found sometimes quality line (the 4th line) also starts with @, but they have no space

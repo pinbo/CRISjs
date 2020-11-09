@@ -6,8 +6,12 @@ var dictSample = {}; // a dictionary of demultiplexed samples: key is barcodes
 
 //download a zipped file containing all gz files
 function download(){
+	document.getElementById("progress2").max = Object.keys(dictSample).length;
+	document.getElementById("progress2").value = 0;
+	document.getElementById("gzip-progress").style.visibility = "visible";
 	var zip = new JSZip();
 	for (let k in dictSample){
+		document.getElementById("progress2").value += 1;
 		let text = dictSample[k];
 		let output = pako.gzip(text);
 		zip.file(k + ".gz", output);
@@ -23,10 +27,12 @@ function download(){
 function clearseq() {
     document.getElementById("left").value = "";
     document.getElementById("right").value = "";
-    document.getElementById("demo").innerHTML = "";
+	document.getElementById("demo1").innerHTML = "";
+	document.getElementById("demo2").innerHTML = "";
     document.getElementById('output').value = "";
     document.getElementById("download-btn").style.visibility = "hidden";
-    document.getElementById("progress").style.visibility = "hidden";
+	document.getElementById("demultiplex-progress").style.visibility = "hidden";
+	document.getElementById("gzip-progress").style.visibility = "hidden";
 };
 
 //add example input
@@ -108,20 +114,20 @@ class sample {
 // process fastq file
 function demultiplex(fileContent){
 	var lines = fileContent.split(/\r?\n/);
-	document.getElementById("progress").max = lines.length;
-	document.getElementById("progress").value = 0;
-	document.getElementById("progress").style.visibility = "visible";
+	document.getElementById("progress1").max = lines.length;
+	document.getElementById("progress1").value = 0;
+	document.getElementById("demultiplex-progress").style.visibility = "visible";
 	//var samples = {}; // a dictionary of demultiplexed samples
 	var leftAdapter = document.getElementById('left').value;
 	var rightAdapter = document.getElementById('right').value;
-	var barcodeLenToCheck = 8;// whole barcode
+	//var barcodeLenToCheck = 8;// whole barcode
 	var dictPairReads = {};
 	//var dictPairReads = {} # dictionary of sample reads R1 and R2
 	var n1 = 0; 
 	var n2 = 1;
 	var readID = "";
 	for (var line of lines){
-		document.getElementById("progress").value += 1;
+		document.getElementById("progress1").value += 1;
 		if (line){
 			let ss = line.split(/\t/);
 			if (line.startsWith("@") && line.includes(" ")){ // I found sometimes quality line (the 4th line) also starts with @, but they have no space
@@ -153,13 +159,13 @@ function demultiplex(fileContent){
 				var P2 = R2First20bp.indexOf(leftAdapter);
 				var P3 = R1First20bp.indexOf(rightAdapter);
 				var P4 = R2First20bp.indexOf(rightAdapter);
-				if (P1 >= barcodeLenToCheck && P4 >= barcodeLenToCheck){// # if there are still at least 5 bp on the left
-					leftbarcode = R1First20bp.substring((P1 - barcodeLenToCheck), P1);
-					rightbarcode = R2First20bp.substring((P4 - barcodeLenToCheck),P4);
+				if (P1 >= 0 && P4 >= 0){// # if there are still at least 5 bp on the left
+					leftbarcode = R1First20bp.substring(0, P1);
+					rightbarcode = R2First20bp.substring(0,P4);
 				}
-				if (P2 >= barcodeLenToCheck && P3 >= barcodeLenToCheck){
-					leftbarcode = R2First20bp.substring((P2 - barcodeLenToCheck), P2);
-					rightbarcode = R1First20bp.substring((P3 - barcodeLenToCheck), P3);
+				if (P2 >= 0 && P3 >= 0){
+					leftbarcode = R2First20bp.substring(0, P2);
+					rightbarcode = R1First20bp.substring(0, P3);
 					// switch R1 and R2, so R1 always has the left adapter
 					let tmp = dictPairReads[readID].R1;
 					dictPairReads[readID].R1 = dictPairReads[readID].R2;

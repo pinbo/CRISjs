@@ -23,24 +23,25 @@
 	<label for="right">Your right adapter sequence:</label>
 	<input id="right" name="RightAdapter" placeholder="adapter added to your reverse PCR primer" size="40"><br><br>
 	<button onclick="clearseq()">Clear</button>
-	<button onclick="putExample()">Example Input</button><br><br>
+	<button onclick="putExample()">Example Adapters</button><br><br>
 	<label for="barcode">Select the barcode file</label>
 	<input type="file" id="barcode" name="barcode" /><br><br>
 	<label for="fastq">Select the fastq or fastq.gz file</label>
 	<input type="file" id="fastq" name="fastq" /><br><br>
 
-
-
-
-	<button onclick="readBarcode()">Read Barcodes</button>
+	<button style="display:none" onclick="readBarcode()">Read Barcodes</button>
 	<button onclick="startAnalyze()">Start Demultiplex</button>
-	<p id="demo1"></p><br>
-	<p id="demo2"></p><br>
-
-
-	<progress style="visibility:hidden" id="progress" value="0" max="100"></progress><br>
+	<p id="demo1"></p>
+	<p id="demo2"></p>
+	<dev style="visibility:hidden" id="demultiplex-progress">
+		<label for="progress">Demultiplex progress:</label>
+		<progress  id="progress1" value="0" max="100"></progress>
+	</dev><br>
 	<button style="visibility:hidden" id="download-btn" onclick="download()"> Download output csv file</button><br>
-	<p id="demo"></p><br>
+	<dev style="visibility:hidden" id="gzip-progress">
+		<label for="progress2">Creating a zip file:</label>
+		<progress  id="progress2" value="0" max="100"></progress>
+	</dev>
 	<output id="output" style="display:none"></output>
 
 	<script src="libs/pako.min.js"></script>

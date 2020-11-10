@@ -9,7 +9,7 @@ function download(){
 	// document.getElementById("progress2").max = Object.keys(dictSample).length;
 	// document.getElementById("progress2").value = 0;
 	// document.getElementById("gzip-progress").style.visibility = "visible";
-	document.getElementById("demo3").innerHTML = "Creating files for download. It may takes a few seconds";
+	document.getElementById("demo3").innerHTML = "... Creating files for download. It may take a while depending on your input size";
 	var zip = new JSZip();
 	for (let k in dictSample){
 		// document.getElementById("progress2").value += 1;

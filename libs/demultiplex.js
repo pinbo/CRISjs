@@ -121,6 +121,8 @@ function demultiplex(fileContent){
 	//var samples = {}; // a dictionary of demultiplexed samples
 	var leftAdapter = document.getElementById('left').value;
 	var rightAdapter = document.getElementById('right').value;
+	var leftBarcodeLen = document.getElementById('leftBarcodeLen').value;
+	var rightBarcodeLen = document.getElementById('rightBarcodeLen').value;
 	//var barcodeLenToCheck = 8;// whole barcode
 	var dictPairReads = {};
 	//var dictPairReads = {} # dictionary of sample reads R1 and R2
@@ -154,19 +156,19 @@ function demultiplex(fileContent){
 				n2 = 1; // reset to read 1
 				var leftbarcode = "";
 				var rightbarcode = "";
-				var R1First20bp = dictPairReads[readID].R1[1].substring(0,30); // the first 30 bp of R1
-				var R2First20bp = dictPairReads[readID].R2[1].substring(0,30); // the first 30 bp of R2
-				var P1 = R1First20bp.indexOf(leftAdapter); // position of the left adpator in R1
-				var P2 = R2First20bp.indexOf(leftAdapter);
-				var P3 = R1First20bp.indexOf(rightAdapter);
-				var P4 = R2First20bp.indexOf(rightAdapter);
+				var R1First30bp = dictPairReads[readID].R1[1].substring(0,30); // the first 30 bp of R1
+				var R2First30bp = dictPairReads[readID].R2[1].substring(0,30); // the first 30 bp of R2
+				var P1 = R1First30bp.indexOf(leftAdapter); // position of the left adpator in R1
+				var P2 = R2First30bp.indexOf(leftAdapter);
+				var P3 = R1First30bp.indexOf(rightAdapter);
+				var P4 = R2First30bp.indexOf(rightAdapter);
 				if (P1 >= 0 && P4 >= 0){// # if there are still at least 5 bp on the left
-					leftbarcode = R1First20bp.substring(0, P1);
-					rightbarcode = R2First20bp.substring(0,P4);
+					leftbarcode = R1First30bp.substring(P1-leftBarcodeLen, P1);
+					rightbarcode = R2First30bp.substring(P4-rightBarcodeLen,P4);
 				}
 				if (P2 >= 0 && P3 >= 0){
-					leftbarcode = R2First20bp.substring(0, P2);
-					rightbarcode = R1First20bp.substring(0, P3);
+					leftbarcode = R2First30bp.substring(P2-leftBarcodeLen, P2);
+					rightbarcode = R1First30bp.substring(P3-rightBarcodeLen, P3);
 					// switch R1 and R2, so R1 always has the left adapter
 					let tmp = dictPairReads[readID].R1;
 					dictPairReads[readID].R1 = dictPairReads[readID].R2;

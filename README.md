@@ -22,3 +22,8 @@ The output has part that is the same as the [CRIS.py](https://github.com/patrick
 1. All the sequences should be on the same strand as the template (the wild type sequence of your gene)
 2. All the 3 sequences (left and right flanking and the gRNA) should be on the same read (R1 or R2) in the fastq files. Usually we use PE150, which means the intact wild type sequence should be less than 150 bp. If your R1 and R2 has overlap, you can merge them first, so you have more choices of the flanking sequences.
 3. If your R2 read (usually from your reverse primer) includes all the 3 input sequences, you should choose "*Reverse Strand*" near the button "**Start Analyze**".
+
+## Acknowledgement
+This app used [pako](https://github.com/nodeca/pako) for handling gzip files,  [JSZip](https://github.com/Stuk/jszip) for making a zipped file for download, [FileSaver.js](https://github.com/eligrey/FileSaver.js) for downloading files.
+
+Thanks to all the authors.

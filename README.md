@@ -7,6 +7,8 @@ Just like CRISpyJZ, CRISjs searches two flanking sequences of gRNA in fastq file
 
 To understand how it works, check out the **README** of [CRISpyJZ](https://github.com/pinbo/CRISpyJZ) and [CRIS.py](https://github.com/patrickc01/CRIS.py), and read the original CRIS.py paper, [CRIS.py: A Versatile and High-throughput Analysis Program for CRISPR-based Genome Editing](https://www.nature.com/articles/s41598-019-40896-w).
 
+**If you need to do high-capacity analysis or just prefer the command line, check out the standalone command line tool [CRISgo](https://github.com/pinbo/CRISgo).**
+
 ## Usage
 
 Just download or clone this repository, then click "**demultiplex-NGS.html**" if you need to demultiplex an interleaved fastq or fastq.gz file, then click "**CRISPR-editing-check.html**" to start processing individual fastq files.

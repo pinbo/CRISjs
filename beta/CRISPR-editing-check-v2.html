@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>CRISPR editing check</title>
+	<style>
+		body{
+			margin: 0 auto;
+			font-size: 12pt;    
+			/*font-family: 'PT Serif', serif;*/
+			line-height: 1.2;
+			max-width: 8in;
+			/*text-align: justify;*/
+		}
+	</style>
+</head>
+
+<body>
+	<h1>CRISPR Editing Analysis</h1>
+
+<p style="color:red;">!!! Make sure both the left and the right flanking sequences are in the same read or merged read in the fastq file !!!</p>
+
+	<label for="reference">Select the reference (a fasta file with all the gene sequences)</label><br>
+	<input type="file" id="reference" name="reference" /><br><br>
+	<label for="sequences">Please input the gene name, Left flanking, Right flanking, and gRNA sequences, separated by SPACE:</label><br>
+	<textarea id="sequences" name="sequences" rows="5" style="width: 100%; max-width: 100%;" placeholder="template ID, Left flanking, Right flanking, and gRNA sequences"></textarea>
+	<br><br>
+	<button onclick="clearseq()">Clear</button>
+	<button onclick="putExample()">Example Input</button><br><br>
+	<label for="reference">Select the fastq or fastq.gz files for analyzing</label><br>
+	<input type="file" id="files" name="files[]" multiple /><br><br>
+	<button onclick="analyze()">Start Analyze</button>
+	<select id="box1">
+		<option value="F">Forward Strand</option>
+		<option value="R">Reverse Strand</option>
+	</select>
+	<label for="box1">(Read1 or Read2? Forward strand is to check read1; reverse strand is for read2)</label><br>
+	<progress style="visibility:hidden" id="progress" value="0" max="100"></progress><br>
+	<dev id="download" style="visibility:hidden">
+		<button id="download-btn" onclick="download()"> Download output csv file</button><br>
+		<label for="download-name">Download file name (optional)</label>
+		<input id="download-name" name="download-name" placeholder="CRISPR-eidting-summary.csv" size="60"/><br>
+	</dev>
+	<p id="demo"></p><br>
+	<output id="output" style="display:none"></output>
+	<output id="template" style="display:none"></output>
+
+	<h2>Help</h2>
+	<p>This program summarize CRISPR editing results based on the idea of <a href='https://github.com/patrickc01/CRIS.py'>CRIS.py</a>. You can read the paper <a href='https://www.nature.com/articles/s41598-019-40896-w'>here</a>. The basic idea is summarized in its Fig. 1. 
+	<img src="images/CRISjs.png" alt="CRISjs dialog" width=100%></p>
+	<p>All three sequences (the left and right flanking sequences and the gRNA sequences) should be on the <strong>same strand as the template</strong>. If you are working on polyploid species, your left or right flanking sequences should be unique to your template (subgenome) if the fastq files include homolog/homeologs.</p>
+	<h3>Step</h3>
+	<ol>
+	<li>Input all the required sequences. Make sure both the left and the right flanking sequences are in the same read or merged read in the fastq file.</li>
+	<li>Select fastq or fastq.gz files by clicking &quot;<strong>Choose files</strong>&quot;.</li>
+	<li>Start analyzing by clicking the &quot;<strong>Start Analyze</strong>&quot; button. </li>
+	<li>Download the summary file by clicking the &quot;<strong>Download output csv file</strong>&quot; button.</li>
+	</ol>
+	<p>You can click the &quot;<strong>Example input</strong>&quot; button to get the example inputs (then select the example fastq.gz files <a href='https://github.com/pinbo/CRISjs/tree/main/example-input' target='_blank' class='url'>https://github.com/pinbo/CRISjs/tree/main/example-input</a>).</p>
+	<p>If you have a lot of fastq files, you may use the standalone command line program <a href='https://github.com/pinbo/CRISgo'>CRISgo</a>.</p>
+
+
+
+	<script src="libs/pako.min.js"></script>
+	<script src="libs/FileSaver.min.js"></script>
+	<script src="libs/crisjs-functions-v2.js"></script>
+
+</body>
+
+</html>

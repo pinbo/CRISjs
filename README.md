@@ -20,7 +20,7 @@ The output of "**demultiplex-NGS.html**" is a zipped file containing demultiplex
 
 The output of "**CRISPR-editing-check.html**" has part that is the same as the [CRIS.py](https://github.com/patrickc01/CRIS.py) output, but I also added the top 2 mutations and their positions (distance from the PAM).
 
-The program will output a csv files reporting the percentage of intact gRNAs (no editing) and percentage of indels. It also gives the sequences and locations of the top 2 indels and their percentages.
+The program will output a csv files reporting the percentage of intact gRNAs (no editing) and percentage of indels. It also gives the sequences and locations of the top 2 mutations (SNP or indel) and their percentages.
 
 The first line is "Intact reference": the unedited sequences from the left flanking to the right flanking sequences. The 3rd line is the header of the output table. Explanations here:
 

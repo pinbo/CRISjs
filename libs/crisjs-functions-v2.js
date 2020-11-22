@@ -169,7 +169,9 @@ function checkIndel(leftSeq, rightSeq, gRNA, wtSeq, filename, fileContent){//rea
         document.getElementById('output').value += [filename, matchBoth, matchGRNA, matchGRNA/matchBoth*100, nindel, nindel/matchBoth*100, matchLeft, matchRight, matchLeft/matchRight].join(",");
         // find the top2 mutations
         var sortedUniqSeq = sortDict(uniqMutSeq);
-        var cc = 0
+        var cc = 0;
+        var wtCount = 0;
+        if (wtSeq in uniqMutSeq) wtCount = uniqMutSeq[wtSeq];
         for (var mutSeq of sortedUniqSeq){
             if (cc > 1) break;
             if (mutSeq[0] != wtSeq){
@@ -180,7 +182,7 @@ function checkIndel(leftSeq, rightSeq, gRNA, wtSeq, filename, fileContent){//rea
                 document.getElementById('output').value += "," + [mutSeq[0].length - wtSeq.length, mutSeq[1], mutSeq[1]/matchBoth*100, mutSeq[0], ref, alt, pamPos - difLeft].join(",");
             }
         }
-        document.getElementById('output').value += "\n";
+        document.getElementById('output').value += "," + wtCount + "," + wtCount/matchBoth*100 + "\n";
     }
     document.getElementById("progress").value += 1;
 }
@@ -203,7 +205,8 @@ async function analyzeFiles() {
     document.getElementById('output').value += "Intact reference sequence," + wtSeq + "\n\n";
     document.getElementById('output').value += "fastq_file,number_of_matched_reads,number_of_reads_with_intact_gRNA,%intact_gRNA,total_indel,%indel,number_of_reads_with_leftSeq,number_of_reads_with_rightSeq,nleftSeq/nrightSeq,";
     document.getElementById('output').value += "#1_mutation,#1_count,#1_%,#1_seq,#1_ref,#1_alt,#1_bp_left_of_PAM,";
-    document.getElementById('output').value += "#2_mutation,#2_count,#2_%,#2_seq,#2_ref,#2_alt,#2_bp_left_of_PAM\n";
+    document.getElementById('output').value += "#2_mutation,#2_count,#2_%,#2_seq,#2_ref,#2_alt,#2_bp_left_of_PAM,";
+    document.getElementById('output').value += "wtSeq_count,wtSeq_%\n";
     for(var i = 0, f; f = files[i]; i++) {
         // read file content
         console.log(f.name);

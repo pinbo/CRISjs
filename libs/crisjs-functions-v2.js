@@ -5,6 +5,7 @@
 async function analyze(){
     document.getElementById('output').value = "";
     document.getElementById('template').value = "";
+    document.getElementById("demo").innerHTML = "";
     await analyzeFiles();
     //document.getElementById('list').value = '<table id="summary">' + createTable(document.getElementById('list').value.split('\n')) + '</table>';
     //document.getElementById("demo").innerHTML = createTable(document.getElementById('list').value.split('\n'));

@@ -73,7 +73,8 @@ async function getSeq() {
     // var seqdict = readfasta();
 	// console.log(seqdict);
 	var sequences = document.getElementById('sequences').value.trim().split(/ +/);
-	var geneID = sequences[0];
+    var geneID = sequences[0];
+    document.getElementById('download-name').value = geneID + ".csv";
     console.log(geneID);
     readfasta(geneID)
     var leftSeq = sequences[1].toUpperCase();
@@ -158,8 +159,8 @@ function checkIndel(leftSeq, rightSeq, gRNA, wtSeq, filename, fileContent){//rea
         }
     }
     // check linenumber to make sure everything is read
-    console.log(filename + " has line number " + (lineNum - 1));
-    document.getElementById("demo").innerHTML += filename + " has line number " + (lineNum - 1) + "<br>";
+    //console.log(filename + " has total " + (lineNum - 1)/4 + " reads and " + matchBoth + " matches.");// read number
+    document.getElementById("demo").innerHTML += filename + " has total " + (lineNum - 1)/4 + " reads and " + matchBoth + " matches.<br>";
     //return [matchLeft, matchRight, matchGRNA, matchBoth, nindel, indels, uniqMutSeq];
     pamPos = wtSeq.indexOf(gRNA) + gRNA.length; // PAM position
     console.log("matchBoth  " + matchBoth);
@@ -282,6 +283,7 @@ function clearseq() {
     document.getElementById('template').value = "";
     document.getElementById("download").style.visibility = "hidden";
     document.getElementById("progress").style.visibility = "hidden";
+    document.getElementById('download-name').value = "";
 };
 
 // to convert one sequence
